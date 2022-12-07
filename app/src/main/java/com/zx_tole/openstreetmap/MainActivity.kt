@@ -2,34 +2,31 @@ package com.zx_tole.openstreetmap
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
-import android.view.MotionEvent
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.zx_tole.openstreetmap.data.Town
+import com.zx_tole.openstreetmap.viewModels.MainViewModel
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
-import org.osmdroid.views.overlay.ItemizedIconOverlay
 import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.Overlay
-import org.osmdroid.views.overlay.OverlayItem
-import java.util.*
-
 
 class MainActivity : AppCompatActivity() {
     private var mapView: MapView? = null
+    private val viewModel: MainViewModel by viewModels()
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        viewModel.loadJSONFromAsset(this, "items.json")
         setContentView(R.layout.activity_main)
 
         val policy = ThreadPolicy.Builder().permitAll().build()
@@ -53,18 +50,31 @@ class MainActivity : AppCompatActivity() {
         mapView?.setUseDataConnection(true)
         mapView?.setTileSource(TileSourceFactory.MAPNIK)
 
-        val moscowPoint = GeoPoint(55.751244, 37.618423)
+        val aMoscow = Town(
+            55.751244,
+            37.618423,
+            getString(R.string.moscow)
+        )
+
+        val moscowPoint = GeoPoint(aMoscow.aLatitude, aMoscow.aLongitude)
         val moscowMarker = Marker(mapView)
-        moscowMarker.setTextIcon(getString(R.string.moscow))
+        moscowMarker.setTextIcon(aMoscow.name)
         moscowMarker.position = moscowPoint
         moscowMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         mapView?.overlays?.add(moscowMarker)
 
-        val saintPetePoint = GeoPoint(59.937500, 30.308611)
+        val aSaintPete = Town(
+            59.937500,
+            30.308611,
+            getString(R.string.spb)
+        )
+
+        val saintPetePoint = GeoPoint(aSaintPete.aLatitude, aSaintPete.aLongitude)
         val saintPeteMarker = Marker(mapView)
-        saintPeteMarker.setTextIcon(getString(R.string.spb))
+        saintPeteMarker.setTextIcon(aSaintPete.name)
         saintPeteMarker.position = saintPetePoint
         saintPeteMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+
         mapView?.overlays?.add(saintPeteMarker)
 
         mapView?.controller?.setCenter(saintPetePoint)
