@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Open street map</string>
+    <string name="spb">Saint Petersburg</string>
+    <string name="moscow">Moscow</string>
+</resources>
