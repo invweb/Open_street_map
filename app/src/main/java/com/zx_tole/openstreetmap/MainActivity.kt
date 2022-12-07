@@ -17,17 +17,20 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import com.zx_tole.openstreetmap.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private var mapView: MapView? = null
     private val viewModel: MainViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
         viewModel.loadJSONFromAsset(this, "items.json")
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         val policy = ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
@@ -38,14 +41,14 @@ class MainActivity : AppCompatActivity() {
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
         Configuration.getInstance().userAgentValue = BuildConfig.APPLICATION_ID
         
-        mapView = findViewById(R.id.mapview)
+        mapView = binding.mapview
         mapView?.setTileSource(TileSourceFactory.MAPNIK)
         mapView?.setLayerType(View.LAYER_TYPE_HARDWARE,null )
         mapView?.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE)
         mapView?.setMultiTouchControls(true)
         mapView?.zoomController?.setVisibility(CustomZoomButtonsController.Visibility.ALWAYS)
         val mapController = mapView?.controller
-        mapController?.setZoom(12.0)
+        mapController?.setZoom(6.0)
 
         mapView?.setUseDataConnection(true)
         mapView?.setTileSource(TileSourceFactory.MAPNIK)
