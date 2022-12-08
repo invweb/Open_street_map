@@ -9,7 +9,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import com.zx_tole.openstreetmap.data.City
+import com.zx_tole.openstreetmap.databinding.ActivityMainBinding
 import com.zx_tole.openstreetmap.viewModels.MainViewModel
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -17,7 +17,6 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
-import com.zx_tole.openstreetmap.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private var mapView: MapView? = null
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        viewModel.loadJSONFromAsset(this, "CitiesAndAttractions.json")
+        val markers = viewModel.loadJSONFromAsset(this, "CitiesAndAttractions.json")
         setContentView(binding.root)
 
         val policy = ThreadPolicy.Builder().permitAll().build()
@@ -50,8 +49,22 @@ class MainActivity : AppCompatActivity() {
         val mapController = mapView?.controller
         mapController?.setZoom(6.0)
 
+        val centerGeoPoint = GeoPoint(markers!!.centerLat, markers.centerLon)
+        mapController?.setCenter(centerGeoPoint)
+
         mapView?.setUseDataConnection(true)
         mapView?.setTileSource(TileSourceFactory.MAPNIK)
+
+
+        for (city in markers.items) {
+            val cityPoint = GeoPoint(city.lat, city.lon)
+
+            val cityMarker = Marker(mapView)
+            cityMarker.title = city.name
+            cityMarker.position = cityPoint
+            cityMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            mapView?.overlays?.add(cityMarker)
+        }
     }
 
     override fun onResume() {
