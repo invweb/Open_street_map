@@ -3,14 +3,15 @@ package com.zx_tole.openstreetmap.viewModels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import org.json.JSONObject
+import com.zx_tole.openstreetmap.data.Markers
 import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.Charset
 
 class MainViewModel: ViewModel() {
-    fun loadJSONFromAsset(context: Context, assetName: String): String? {
+    lateinit var markers: Markers
+    fun loadJSONFromAsset(context: Context, assetName: String): Markers? {
         val json: String? = try {
             val inputStream:InputStream  = context.assets.open(assetName)
             val size: Int = inputStream.available()
@@ -24,12 +25,8 @@ class MainViewModel: ViewModel() {
         }
 
         json?.let {
-            val obj = JSONObject(json)
+            markers = Gson().fromJson(it, Markers::class.java)
         }
-
-        val gson = Gson()
-        
-
-        return json
+        return markers
     }
 }

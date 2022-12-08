@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        viewModel.loadJSONFromAsset(this, "items.json")
+        viewModel.loadJSONFromAsset(this, "CitiesAndAttractions.json")
         setContentView(binding.root)
 
         val policy = ThreadPolicy.Builder().permitAll().build()
@@ -52,35 +52,6 @@ class MainActivity : AppCompatActivity() {
 
         mapView?.setUseDataConnection(true)
         mapView?.setTileSource(TileSourceFactory.MAPNIK)
-
-//        val aMoscow = City(
-//            55.751244,
-//            37.618423,
-//            getString(R.string.moscow),
-//        )
-//
-//        val moscowPoint = GeoPoint(aMoscow.lat, aMoscow.lon)
-//        val moscowMarker = Marker(mapView)
-//        moscowMarker.setTextIcon(aMoscow.name)
-//        moscowMarker.position = moscowPoint
-//        moscowMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-//        mapView?.overlays?.add(moscowMarker)
-//
-//        val aSaintPete = City(
-//            59.937500,
-//            30.308611,
-//            getString(R.string.spb)
-//        )
-//
-//        val saintPetePoint = GeoPoint(aSaintPete.lat, aSaintPete.lon)
-//        val saintPeteMarker = Marker(mapView)
-//        saintPeteMarker.setTextIcon(aSaintPete.name)
-//        saintPeteMarker.position = saintPetePoint
-//        saintPeteMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-//
-//        mapView?.overlays?.add(saintPeteMarker)
-//
-//        mapView?.controller?.setCenter(saintPetePoint)
     }
 
     override fun onResume() {
