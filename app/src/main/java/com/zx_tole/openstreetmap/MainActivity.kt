@@ -9,7 +9,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import com.zx_tole.openstreetmap.data.Town
+import com.zx_tole.openstreetmap.data.City
 import com.zx_tole.openstreetmap.viewModels.MainViewModel
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -53,34 +53,34 @@ class MainActivity : AppCompatActivity() {
         mapView?.setUseDataConnection(true)
         mapView?.setTileSource(TileSourceFactory.MAPNIK)
 
-        val aMoscow = Town(
-            55.751244,
-            37.618423,
-            getString(R.string.moscow)
-        )
-
-        val moscowPoint = GeoPoint(aMoscow.aLatitude, aMoscow.aLongitude)
-        val moscowMarker = Marker(mapView)
-        moscowMarker.setTextIcon(aMoscow.name)
-        moscowMarker.position = moscowPoint
-        moscowMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        mapView?.overlays?.add(moscowMarker)
-
-        val aSaintPete = Town(
-            59.937500,
-            30.308611,
-            getString(R.string.spb)
-        )
-
-        val saintPetePoint = GeoPoint(aSaintPete.aLatitude, aSaintPete.aLongitude)
-        val saintPeteMarker = Marker(mapView)
-        saintPeteMarker.setTextIcon(aSaintPete.name)
-        saintPeteMarker.position = saintPetePoint
-        saintPeteMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-
-        mapView?.overlays?.add(saintPeteMarker)
-
-        mapView?.controller?.setCenter(saintPetePoint)
+//        val aMoscow = City(
+//            55.751244,
+//            37.618423,
+//            getString(R.string.moscow),
+//        )
+//
+//        val moscowPoint = GeoPoint(aMoscow.lat, aMoscow.lon)
+//        val moscowMarker = Marker(mapView)
+//        moscowMarker.setTextIcon(aMoscow.name)
+//        moscowMarker.position = moscowPoint
+//        moscowMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+//        mapView?.overlays?.add(moscowMarker)
+//
+//        val aSaintPete = City(
+//            59.937500,
+//            30.308611,
+//            getString(R.string.spb)
+//        )
+//
+//        val saintPetePoint = GeoPoint(aSaintPete.lat, aSaintPete.lon)
+//        val saintPeteMarker = Marker(mapView)
+//        saintPeteMarker.setTextIcon(aSaintPete.name)
+//        saintPeteMarker.position = saintPetePoint
+//        saintPeteMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+//
+//        mapView?.overlays?.add(saintPeteMarker)
+//
+//        mapView?.controller?.setCenter(saintPetePoint)
     }
 
     override fun onResume() {

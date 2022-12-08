@@ -2,6 +2,8 @@ package com.zx_tole.openstreetmap.viewModels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
+import org.json.JSONObject
 import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
@@ -20,6 +22,14 @@ class MainViewModel: ViewModel() {
             Timber.e(ex)
             return null
         }
+
+        json?.let {
+            val obj = JSONObject(json)
+        }
+
+        val gson = Gson()
+        
+
         return json
     }
 }
