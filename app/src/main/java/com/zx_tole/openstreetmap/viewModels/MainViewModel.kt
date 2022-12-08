@@ -10,7 +10,7 @@ import java.io.InputStream
 import java.nio.charset.Charset
 
 class MainViewModel: ViewModel() {
-    lateinit var markers: Markers
+    private lateinit var markers: Markers
     fun loadJSONFromAsset(context: Context, assetName: String): Markers? {
         val json: String? = try {
             val inputStream:InputStream  = context.assets.open(assetName)
