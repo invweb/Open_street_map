@@ -3,6 +3,7 @@ package com.zx_tole.openstreetmap.viewModels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
+import com.zx_tole.openstreetmap.data.City
 import com.zx_tole.openstreetmap.data.Markers
 import timber.log.Timber
 import java.io.IOException
