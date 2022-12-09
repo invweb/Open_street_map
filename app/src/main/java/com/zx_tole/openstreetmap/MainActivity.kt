@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun addRoad(source_lat: Double, source_lng: Double, dst_lat: Double, dst_lng: Double){
+    private fun addRoad(source_lat: Double, source_lng: Double, dst_lat: Double, dst_lng: Double){
         Thread {
             val roadManager: RoadManager = OSRMRoadManager(this, "")
             val waypoints = ArrayList<GeoPoint>()
