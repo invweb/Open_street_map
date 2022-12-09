@@ -78,11 +78,11 @@ class MainActivity : AppCompatActivity() {
 
                 if(attractionFirst == null){
                     attractionFirst = attraction
-                } else if(attractionSecond == null) {
+                } else {
                     attractionSecond = attraction
                 }
 
-                if(attractionFirst != null && attractionSecond != null) {
+                if(attractionSecond != null) {
                     addRoad(
                         attractionFirst.lat,
                         attractionFirst.lon,
@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity() {
 
             road?.let {
                 runOnUiThread {
-                    if (it.mStatus !== Road.STATUS_OK) {
+                    if (it.mStatus != Road.STATUS_OK) {
                         Timber.d("handle error... warn the user, etc.")
                     }
                     val roadOverlay: Polyline =
