@@ -9,6 +9,7 @@ import android.os.StrictMode.ThreadPolicy
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import com.zx_tole.openstreetmap.data.Attraction
 import com.zx_tole.openstreetmap.databinding.ActivityMainBinding
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity() {
             val cityMarker = Marker(mapView)
             cityMarker.title = city.name
             cityMarker.position = cityPoint
+            cityMarker.icon = ContextCompat.getDrawable(this, R.drawable.city)
             cityMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
             mapView?.overlays?.add(cityMarker)
         }
