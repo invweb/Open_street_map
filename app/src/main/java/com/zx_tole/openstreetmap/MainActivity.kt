@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                 val attractionMarker = Marker(mapView)
                 attractionMarker.title = attraction.name
                 attractionMarker.position = attractionPoint
+                attractionMarker.snippet = attraction.info
                 attractionMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
                 mapView?.overlays?.add(attractionMarker)
 
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity() {
             val cityPoint = GeoPoint(city.lat, city.lon)
             val cityMarker = Marker(mapView)
             cityMarker.title = city.name
+            cityMarker.snippet = city.info
             cityMarker.position = cityPoint
             cityMarker.icon = ContextCompat.getDrawable(this, R.drawable.city)
             cityMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
