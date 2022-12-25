@@ -26,7 +26,6 @@ import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
 import timber.log.Timber
 
-
 class MainActivity : AppCompatActivity() {
     private var mapView: MapView? = null
     private val viewModel: MainViewModel by viewModels()
